@@ -1,0 +1,49 @@
+<html data-ng-app="prueba">
+<head>
+  <title>Algortimo de Cristhian</title>
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <script src="js/angular.min.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/socket.io.js"></script>
+</head>
+<body data-ng-controller="Controller as ctrl" >
+  <nav>
+    <div class="nav-wrapper indigo">
+      <a href="#" class="brand-logo">Algortimo de Berkeley</a>
+    </div>
+  </nav>
+  <table class="striped">
+    <thead>
+      <tr>
+          <th>No</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="log in loggers">
+        <td>{{ log }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="centered">
+    <thead>
+      <tr>
+          <th>No</th>
+          <th>Hora del Servidor</th>
+          <th>Hora Local</th>
+          <th>Diferencia</th>
+          <th>Promedio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in info">
+        <td>{{ i.timeServer }}</td>
+        <td>{{ i.myTime }}</td>
+        <td>{{ i.difference }}</td>
+        <td>{{ i.average }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
