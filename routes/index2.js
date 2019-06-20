@@ -6,7 +6,7 @@ let myTime;
 let difference;
 let average;
 router.get('/', function(req, res) {
-  res.render('index');
+  res.render('index2');
 });
 
 

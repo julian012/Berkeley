@@ -1,4 +1,4 @@
-angular.module('prueba', [])
+angular.module('prueba2', [])
     .controller('Controller', ['$scope', '$http' ,($scope, $http) => {
       let ctrl = this;
       let socket = io();
