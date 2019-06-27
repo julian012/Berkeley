@@ -3,7 +3,6 @@ angular.module('prueba', [])
       let socket = io('http://localhost:3100/hour');
       $scope.loggers = [];
       $scope.info = [];
-      $scope.actualTime = new Date();
 
       setInterval( () => {
         $scope.actualTime = new Date();
@@ -46,7 +45,7 @@ angular.module('prueba', [])
       //Metodo de mandar la Hora
       socket.on('time', (message) => {
         console.log("Me estan pidiendo la hora");
-        socket.emit('send', { hour : $scope.actualTime });
+        socket.emit('send', { hour : Date.now() });
         console.log('Envio la respuesta mandando la hora');
       });
 
