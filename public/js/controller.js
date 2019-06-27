@@ -42,14 +42,14 @@ angular.module('prueba', [])
       })
 
       //Metodo de mandar la Hora
-      socket.on('hour', (message) => {
+      socket.on('time', (message) => {
         console.log("Me estan pidiendo la hora");
         socket.emit('send', { hour : Date.now() });
         console.log('Envio la respuesta mandando la hora');
       });
 
       //LLega la hora al cliente
-      socket.on('newHour', (message) =>{
+      socket.on('newTime', (message) =>{
         $scope.countryTime.setSeconds(countryTime.getSeconds() - message.difference);
         $scope.countryTime.toLocaleTimeString('es-CO');
         $scope.$apply();
