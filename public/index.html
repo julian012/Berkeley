@@ -18,21 +18,17 @@
     <thead>
       <tr>
           <th>No</th>
-          <th>Hora del Servidor</th>
-          <th>Hora Local</th>
-          <th>Diferencia</th>
-          <th>Promedio</th>
+          <th>Hora Actual</th>
           <th>Ajuste</th>
+          <th>Resultado</th>
       </tr>
     </thead>
     <tbody>
       <tr data-ng-repeat="i in info">
         <td>{{ i.no}}</td>
-        <td>{{ i.timeServer }}</td>
         <td>{{ i.myTime }}</td>
-        <td>{{ i.difference }}ms</td>
-        <td>{{ i.average }}ms</td>
         <td>{{ i.adjustment}}</td>
+        <td>{{ i.result}}</td>
       </tr>
     </tbody>
   </table>

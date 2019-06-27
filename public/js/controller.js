@@ -5,10 +5,11 @@ angular.module('prueba', [])
 
       $scope.loggers = [];
       $scope.info = [];
+      $scope.actualTime = new Date();
+      $scope.actualTime.setTime( $scope.actualTime.getTime() - 100000 );
 
       interval = setInterval( () => {
-        $scope.actualTime = new Date();
-        $scope.actualTime.setMinutes( $scope.actualTime.getMinutes() + 10);
+        $scope.actualTime.setTime( $scope.actualTime.getTime() + 1000 );
         $scope.countryTime = new Date($scope.actualTime).toLocaleTimeString('es-CO');
         $scope.$apply();
       }, 1000);
@@ -53,9 +54,19 @@ angular.module('prueba', [])
 
       //LLega la hora al cliente
       socket.on('newTime', (message) =>{
-          clearInterval(interval);
-          $scope.countryTime = new Date($scope.actualTime.getTime() + message.difference);
-          $scope.countryTime.toLocaleTimeString('es-CO');
-          $scope.$apply();
+          //clearInterval(interval);
+          console.log($scope.actualTime, "Antes");
+          console.log(message.difference);
+          $scope.newHour = new Date($scope.actualTime.getTime() + message.difference);
+          $scope.info.push({
+            no : $scope.info.length, 
+            myTime : $scope.actualTime.toLocaleTimeString('es-CO'), 
+            adjustment : message.difference,
+            result :  $scope.newHour.toLocaleTimeString('es-CO')
+          });
+          $scope.actualTime.setTime($scope.newHour);
+          console.log($scope.actualTime, "Despues ");
+          
+        $scope.$apply(); 
       })
     }]);
