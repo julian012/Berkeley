@@ -48,5 +48,12 @@ angular.module('prueba', [])
         socket.emit('send', { hour : Date.now() });
         console.log('Envio la respuesta mandando la hora');
       });
+
+      //LLega la hora al cliente
+      socket.on('newHour', (message) =>{
+        $scope.countryTime.setSeconds(countryTime.getSeconds() - message.difference);
+        $scope.countryTime.toLocaleTimeString('es-CO');
+        $scope.$apply();
+      })
       
     }]);
