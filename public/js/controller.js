@@ -1,10 +1,12 @@
 angular.module('prueba', [])
     .controller('Controller', ['$scope',($scope) => {
       let socket = io('http://localhost:3100/hour');
+      let interval = null;
+
       $scope.loggers = [];
       $scope.info = [];
 
-      setInterval( () => {
+      interval = setInterval( () => {
         $scope.actualTime = new Date();
         $scope.actualTime.setMinutes( $scope.actualTime.getMinutes() + 10);
         $scope.countryTime = new Date($scope.actualTime).toLocaleTimeString('es-CO');
@@ -51,8 +53,9 @@ angular.module('prueba', [])
 
       //LLega la hora al cliente
       socket.on('newTime', (message) =>{
-        $scope.countryTime.setSeconds(countryTime.getSeconds() - message.difference);
-        $scope.countryTime.toLocaleTimeString('es-CO');
-        $scope.$apply();
+          clearInterval(interval);
+          $scope.countryTime = new Date($scope.actualTime.getTime() + message.difference);
+          $scope.countryTime.toLocaleTimeString('es-CO');
+          $scope.$apply();
       })
     }]);
