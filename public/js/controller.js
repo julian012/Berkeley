@@ -1,6 +1,5 @@
 angular.module('prueba', [])
-    .controller('Controller', ['$scope', '$http' ,($scope, $http) => {
-      let ctrl = this;
+    .controller('Controller', ['$scope',($scope) => {
       let socket = io('http://localhost:3100/hour');
       $scope.loggers = [];
       $scope.info = [];
@@ -55,5 +54,4 @@ angular.module('prueba', [])
         $scope.countryTime.toLocaleTimeString('es-CO');
         $scope.$apply();
       })
-      
     }]);
