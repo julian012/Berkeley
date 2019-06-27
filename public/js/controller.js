@@ -3,13 +3,15 @@ angular.module('prueba', [])
       let socket = io('http://localhost:3100/hour');
       $scope.loggers = [];
       $scope.info = [];
-      
-      setTimeout( () => {
+      $scope.actualTime = new Date();
+
+      setInterval( () => {
         $scope.actualTime = new Date();
-        $scope.actualTime.setMinutes( $scope.actualTime.getMinutes());
+        $scope.actualTime.setMinutes( $scope.actualTime.getMinutes() + 10);
         $scope.countryTime = new Date($scope.actualTime).toLocaleTimeString('es-CO');
         $scope.$apply();
-      }, 1000)
+      }, 1000);
+
       socket.on( 'print', (message) => {
         $scope.timeServer = new Date(message.timeServer).toLocaleTimeString('es-CO');
         $scope.myTime = new Date(message.myTime).toLocaleTimeString('es-CO');
@@ -39,12 +41,12 @@ angular.module('prueba', [])
           $scope.loggers.push(message);
           console.log($scope.loggers);
           $scope.$apply();
-      })
+      });
 
       //Metodo de mandar la Hora
       socket.on('time', (message) => {
         console.log("Me estan pidiendo la hora");
-        socket.emit('send', { hour : Date.now() });
+        socket.emit('send', { hour : $scope.actualTime });
         console.log('Envio la respuesta mandando la hora');
       });
 
