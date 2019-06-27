@@ -45,7 +45,7 @@ angular.module('prueba', [])
       //Metodo de mandar la Hora
       socket.on('time', (message) => {
         console.log("Me estan pidiendo la hora");
-        socket.emit('send', { hour : Date.now() });
+        socket.emit('send', { socket: socket.id, hour : $scope.actualTime.getTime() });
         console.log('Envio la respuesta mandando la hora');
       });
 
